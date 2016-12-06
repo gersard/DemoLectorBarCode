@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gerardo.demolectorbarcode.LectorActivity">
+
+    <SurfaceView
+        android:id="@+id/camera_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/viewleft"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorTransparecy"
+        android:layout_above="@+id/viewbottom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewtop" />
+
+    <View
+        android:id="@+id/viewtop"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorTransparecy" />
+
+    <View
+        android:id="@+id/viewbottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorTransparecy"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <View
+        android:id="@+id/viewright"
+        android:layout_above="@+id/viewbottom"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/viewtop"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorTransparecy" />
+
+
+</RelativeLayout>
