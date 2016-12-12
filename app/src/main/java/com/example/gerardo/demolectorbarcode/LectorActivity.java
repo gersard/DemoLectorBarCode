@@ -1,5 +1,6 @@
 package com.example.gerardo.demolectorbarcode;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.support.v4.app.ActivityCompat;
@@ -88,8 +89,12 @@ public class LectorActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LectorActivity.this, barcodes.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LectorActivity.this, barcodes.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
                            release();
+                            Intent intent = new Intent();
+                            intent.putExtra("barcode",barcodes.valueAt(0).displayValue);
+                            setResult(RESULT_OK,intent);
+                            finish();
                         }
                     });
 
