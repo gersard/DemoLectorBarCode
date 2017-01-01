@@ -3,7 +3,8 @@
     package="com.example.gerardo.demolectorbarcode">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
     <application
@@ -19,12 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LectorActivity"></activity>
+        <activity android:name=".LectorActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2531c66b41ca8dbf5a844fc500d1f31a4879bf14" />
     </application>
 
 </manifest>

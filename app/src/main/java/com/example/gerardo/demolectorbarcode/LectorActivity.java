@@ -1,8 +1,8 @@
 package com.example.gerardo.demolectorbarcode;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +12,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -22,6 +27,7 @@ import java.io.IOException;
 public class LectorActivity extends AppCompatActivity {
 
     Boolean onFlash;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,6 @@ public class LectorActivity extends AppCompatActivity {
                 .Builder(this, barcodeDetector)
                 .setAutoFocusEnabled(true)
                 .build();
-
 
 
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -90,10 +95,14 @@ public class LectorActivity extends AppCompatActivity {
                         @Override
                         public void run() {
 //                            Toast.makeText(LectorActivity.this, barcodes.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
-                           release();
+                            release();
+
+                            Answers.getInstance().logCustom(new CustomEvent("Escaneó un codigo de barra")
+                                    .putCustomAttribute("barcode",barcodes.valueAt(0).displayValue));
+
                             Intent intent = new Intent();
-                            intent.putExtra("barcode",barcodes.valueAt(0).displayValue);
-                            setResult(RESULT_OK,intent);
+                            intent.putExtra("barcode", barcodes.valueAt(0).displayValue);
+                            setResult(RESULT_OK, intent);
                             finish();
                         }
                     });
@@ -102,5 +111,17 @@ public class LectorActivity extends AppCompatActivity {
             }
         });
 
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName("Lector de Barcode")
+                .putContentType("Camara para escanear")
+                .putContentId("123"));
+
+
     }
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+    }
+
 }
