@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">DemoLectorBarCode</string>
+
+    <string name="title_libre_gluten">Libre de gluten</string>
+    <string name="message_libre_gluten">La empresa ha presentado análisis de prolamina o gluten,
+        con una validez de un año a partir de la fecha de emisión, y cuyo resultado no sobrepasa el
+        límite de detección de 3ppm de gluten</string>
+
+    <string name="title_puede_gluten">Puede contener gluten</string>
+    <string name="message_puede_gluten">La empresa no ha renovado el análisis de gluten del producto.
+        (certificación vencida).</string>
+
+    <string name="title_contiene_gluten">Contiene gluten</string>
+    <string name="message_contiene_gluten">La empresa estima e informa a Convivir que el producto no
+        continuará con la certificación libre de gluten</string>
+
 </resources>

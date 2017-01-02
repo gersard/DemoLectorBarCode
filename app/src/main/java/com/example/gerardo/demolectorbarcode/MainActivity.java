@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnLEctor = (Button) findViewById(R.id.btn_lector);
 
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<Consulta> consultas = realm.where(Consulta.class).findAll();
+        final RealmResults<Consulta> consultas = realm.where(Consulta.class).findAll();
         TextView txtSinRegistros = (TextView) findViewById(R.id.txt_sin_registros);
         if (consultas.size() == 0){
             txtSinRegistros.setVisibility(View.VISIBLE);
@@ -89,8 +89,16 @@ public class MainActivity extends AppCompatActivity {
 //                .putCustomAttribute("Screen Orientation", "Landscape"));
 
 
-
-
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (consultas.size() > 0){
+                    Consulta consulta = consultas.get(recyclerView.getChildAdapterPosition(view));
+                    ResultadoDialog dialog = new ResultadoDialog(MainActivity.this,consulta.getResultado());
+                    dialog.show();
+                }
+            }
+        });
 
 
 
@@ -136,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
                             if (dialog.isShowing()){
                                 dialog.dismiss();
                             }
+                            ResultadoDialog resultadoDialog = new ResultadoDialog(MainActivity.this,
+                                    Integer.parseInt(data.child("resultado").getValue().toString()));
+                            resultadoDialog.show();
                         }
                     });
 
@@ -150,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("valores", "Failed to read value.", error.toException());
             }
         });
+
+
+
     }
 
     private void updateRecyclerView(Realm realm){
